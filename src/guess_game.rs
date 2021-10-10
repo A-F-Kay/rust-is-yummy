@@ -1,9 +1,11 @@
-pub enum WrongNumber {
+use std::io;
+
+enum WrongNumber {
     TooBig,
     TooSmall,
 }
 
-pub enum GuessError {
+enum GuessError {
     NaN,
     OutOfRange,
     WrongNumber(WrongNumber),
@@ -16,15 +18,51 @@ pub struct GuessGame {
 }
 
 impl GuessGame {
-    pub fn say_hello(&self) {
+    pub fn play(&self) {
+        self.say_hello();
+
+        let mut input = String::new();
+
+        loop {
+            input.clear();
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Error reading line");
+
+            match self.make_guess(&input) {
+                Ok(()) => {
+                    println!("Nice one! You guessed it right! :)");
+                    break;
+                }
+                Err(GuessError::OutOfRange) => {
+                    println!("Out of range. Valid range: {}", self.range_str());
+                    continue;
+                }
+                Err(GuessError::NaN) => {
+                    println!("Please enter a valid number.");
+                    continue;
+                }
+                Err(GuessError::WrongNumber(WrongNumber::TooSmall)) => {
+                    println!("Too small value :) Try again.");
+                    continue;
+                }
+                Err(GuessError::WrongNumber(WrongNumber::TooBig)) => {
+                    println!("Try smaller value :3");
+                    continue;
+                }
+            };
+        }
+    }
+
+    fn say_hello(&self) {
         println!("{}", self.hello_message);
     }
 
-    pub fn range_str(&self) -> String {
+    fn range_str(&self) -> String {
         format!("({}-{})", self.guess_range.0, self.guess_range.1)
     }
 
-    pub fn make_guess(&self, input: &String) -> Result<(), GuessError> {
+    fn make_guess(&self, input: &String) -> Result<(), GuessError> {
         let value = match input.trim().parse() {
             Ok(n) => n,
             Err(_) => return Err(GuessError::NaN),

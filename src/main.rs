@@ -1,6 +1,5 @@
-use crate::guess_game::{GuessError, GuessGame, WrongNumber};
+use crate::guess_game::GuessGame;
 use chrono::{Date, TimeZone, Utc};
-use std::io;
 
 mod guess_game;
 #[allow(dead_code)] // FIXME: remove?
@@ -21,37 +20,5 @@ fn main() {
         guess_range: (1, 100),
         hello_message: String::from("Hi. Please guess my age :)"),
     };
-    game.say_hello();
-
-    let mut input = String::new();
-
-    loop {
-        input.clear();
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Error reading line");
-
-        match game.make_guess(&input) {
-            Ok(()) => {
-                println!("Nice one! You guessed it right! :)");
-                break;
-            }
-            Err(GuessError::OutOfRange) => {
-                println!("Out of range. Valid range: {}", game.range_str());
-                continue;
-            }
-            Err(GuessError::NaN) => {
-                println!("Please enter a valid number.");
-                continue;
-            }
-            Err(GuessError::WrongNumber(WrongNumber::TooSmall)) => {
-                println!("Too small value :) Try again.");
-                continue;
-            }
-            Err(GuessError::WrongNumber(WrongNumber::TooBig)) => {
-                println!("Try smaller value :3");
-                continue;
-            }
-        };
-    }
+    game.play();
 }
