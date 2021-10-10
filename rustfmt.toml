@@ -1,0 +1,10 @@
+reorder_imports = true
+
+
+#======== Unstable features =======#
+# Enable
+unstable_features = true
+
+# Features:
+imports_granularity = "Crate"
+#==================================#
