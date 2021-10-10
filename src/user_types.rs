@@ -62,12 +62,12 @@ impl User {
         let today = Utc::now().date();
         let (month, day) = (today.month(), today.day());
 
-        let (born_month, born_day) = (self.born_at.month(), self.born_at.day());
+        let (birth_month, birth_day) = (self.born_at.month(), self.born_at.day());
 
-        let passed_birthday_this_year = if month == born_month {
-            day >= born_day
+        let passed_birthday_this_year = if month == birth_month {
+            day >= birth_day
         } else {
-            month > born_month
+            month > birth_month
         };
 
         let age_modifier = if passed_birthday_this_year { 0 } else { -1 };
