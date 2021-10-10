@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Switch to nightly
-      run: rustup toolchain install nightly && rustup default nightly
+      run: rustup toolchain install nightly && rustup default nightly && rustup component add rustfmt --toolchain nightly
     - name: Check formatting
       run: rustfmt --check src/*
     - name: Build
