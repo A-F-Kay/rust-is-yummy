@@ -44,11 +44,11 @@ fn main() {
                 println!("Please enter a valid number.");
                 continue;
             }
-            Err(GuessError::WrongNumber(WrongNumber::TooLess)) => {
+            Err(GuessError::WrongNumber(WrongNumber::TooSmall)) => {
                 println!("Too small value :) Try again.");
                 continue;
             }
-            Err(GuessError::WrongNumber(WrongNumber::TooMuch)) => {
+            Err(GuessError::WrongNumber(WrongNumber::TooBig)) => {
                 println!("Try smaller value :3");
                 continue;
             }

@@ -1,6 +1,5 @@
 use chrono::prelude::Date;
-use chrono::{Datelike, Duration, Local, Utc};
-use std::ops::Sub;
+use chrono::{Datelike, Utc};
 
 // id, username
 pub type SimpleUser = (i32, String);

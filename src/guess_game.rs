@@ -1,6 +1,6 @@
 pub enum WrongNumber {
-    TooMuch,
-    TooLess,
+    TooBig,
+    TooSmall,
 }
 
 pub enum GuessError {
@@ -33,9 +33,9 @@ impl GuessGame {
         if self.is_out_of_range(value) {
             Err(GuessError::OutOfRange)
         } else if value < self.win_number {
-            Err(GuessError::WrongNumber(WrongNumber::TooLess))
+            Err(GuessError::WrongNumber(WrongNumber::TooSmall))
         } else if value > self.win_number {
-            Err(GuessError::WrongNumber(WrongNumber::TooMuch))
+            Err(GuessError::WrongNumber(WrongNumber::TooBig))
         } else {
             Ok(())
         }
