@@ -64,12 +64,10 @@ impl User {
 
         let (born_month, born_day) = (self.born_at.month(), self.born_at.day());
 
-        let passed_birthday_this_year = if born_month < month {
-            true
-        } else if born_month == month {
-            born_day >= day
+        let passed_birthday_this_year = if month == born_month {
+            day >= born_day
         } else {
-            false
+            month > born_month
         };
 
         let age_modifier = if passed_birthday_this_year { 0 } else { -1 };
