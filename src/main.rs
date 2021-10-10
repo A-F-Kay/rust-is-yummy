@@ -4,17 +4,17 @@ use std::io;
 
 mod guess_game;
 #[allow(dead_code)] // FIXME: remove?
-mod types;
+mod user_types;
 
 fn main() {
-    let (id, username): types::SimpleUser = (9000, String::from("afkay"));
-    let afkay = types::User {
+    let (id, username): user_types::SimpleUser = (9000, String::from("afkay"));
+    let afkay = user_types::User {
         id,
         username,
-        gender: types::Gender::Trans(types::Sex::Female),
+        gender: user_types::Gender::Trans(user_types::Sex::Female),
         born_at: Date::from(Utc.ymd(1997, 3, 3)),
         name: (String::from("Lara"), None),
-        country: Some(types::Country::UA),
+        country: Some(user_types::Country::UA),
     };
 
     let game = GuessGame {
