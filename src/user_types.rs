@@ -1,5 +1,4 @@
-use chrono::prelude::Date;
-use chrono::{Datelike, Utc};
+use chrono::{prelude::Date, Datelike, Utc};
 
 // id, username
 pub type SimpleUser = (i32, String);

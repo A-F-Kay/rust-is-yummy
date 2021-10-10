@@ -1,7 +1,9 @@
-use crate::guess_game::GuessGame;
 use chrono::{Date, TimeZone, Utc};
 
+use crate::guess_game::GuessGame;
+
 mod guess_game;
+
 #[allow(dead_code)] // FIXME: remove?
 mod user_types;
 
